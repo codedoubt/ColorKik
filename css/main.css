@@ -112,6 +112,7 @@ h2 {
 .logo a{
 	padding: 0px;
 	color: #7b7b7b;
+	background: none;
 }
 .logo a:hover{
 	background: none;
