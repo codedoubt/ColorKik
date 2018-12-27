@@ -140,11 +140,8 @@ function modifyHeader() {
 		x = w.innerWidth || e.clientWidth || g.clientWidth,
 		y = w.innerHeight || e.clientHeight || g.clientHeight;
 	var left = `<li class="left_link"><a href="/">Images</a></li>`;
-//	<li class="left_link"><a href="/colorkik/colors/">Only Colors</a></li>
-	var right = `<li><a href="/create/">Submit</a></li>
-				<li><a href="/likes/">Your Likes</a></li>
+	var right = `<li><a href="/likes/">Your Likes</a></li>
 				<li><a href="/about/">About</a></li>`;
-
 	if (x > 860) {
 		$('.left')[0].innerHTML = '';
 		$('.left')[0].insertAdjacentHTML('beforeend', left);
