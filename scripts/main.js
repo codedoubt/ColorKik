@@ -14,7 +14,7 @@ function showImages(value) {
 	}
 }
 //https://api.pexels.com/v1/curated?per_page=15&page=1
-//addPhotos('');
+addPhotos('blossom');
 function addPhotos(value) {
 	if (/\S+/.test(value)) {
 		const newValue = encodeURI(value);
@@ -28,7 +28,6 @@ function addPhotos(value) {
 			const data = JSON.parse(http.responseText);
 			const array = data.photos;
 			output.innerHTML = "";
-			var color;
 			for (let i = 0; i < array.length; i++) {
 				const src = array[i].src.medium;
 				const ph = array[i].photographer;
@@ -44,10 +43,9 @@ function addPhotos(value) {
 					const c4 = rgbToHex(p[3]);
 					const c5 = rgbToHex(p[4]);
 					createElement(output, src, ph, pURL, c1, c2, c3, c4, c5);
-
-
-					var color = $('.color');
-					var clipboard = new ClipboardJS(color);
+						 
+					const color = $('.color');
+					const clipboard = new ClipboardJS(color);
 					alerrt(clipboard, color);
 				}
 			}
@@ -79,9 +77,7 @@ function alertColor(color){
 	$('.tip')[0].innerHTML = "";
 	$('.tip')[0].innerHTML = color;
 }
-log($('.showColor')[0]);
 function closeTip(){
-	log('I\'m clicked');
 	$('.showColor')[0].style.display = "none";
 }
 //p = photographer
@@ -90,7 +86,7 @@ function createElement(appendTo, img, p, pURL, c1, c2, c3, c4, c5) {
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	const d = new Date();
 	let elem = `<div class="color_palette"><div class="palette">				<div class="img"><img src="${img}" alt="Tyler">
-					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'><p>${c1}</p></div><div class="color" style="background:${c2}" data-c='${c2}'><p>${c2}</p></div><div class="color" style="background:${c3}" data-c='${c3}'><p>${c3}</p></div><div class="color" style="background:${c4}" data-c='${c4}'><p>${c4}</p></div><div class="color" style="background:${c5}" data-c='${c5}'><p>${c5}</p></div></div></div><div class="cFoot">			<button data-id="" class="like"><svg class="btn-svg" viewBox="0 0 400 874" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421">			<path d="M267.614 383.395l132.304 81.708L147.94 873.117l-15.636-383.395L0 408.014 251.979 0l15.635 383.395z"/></svg>Like</button><div id="date">	${d.getDate()} ${monthNames[d.getMonth()]},${d.getFullYear()}</div></div></div>`;
+					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'></div><div class="color" style="background:${c2}" data-c='${c2}'></div><div class="color" style="background:${c3}" data-c='${c3}'></div><div class="color" style="background:${c4}" data-c='${c4}'></div><div class="color" style="background:${c5}" data-c='${c5}'></div></div></div><div class="cFoot"><button data-id="" class="like"><svg class="btn-svg" viewBox="0 0 400 874" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421">			<path d="M267.614 383.395l132.304 81.708L147.94 873.117l-15.636-383.395L0 408.014 251.979 0l15.635 383.395z"/></svg>Like</button><div id="date">	${d.getDate()} ${monthNames[d.getMonth()]},${d.getFullYear()}</div></div></div>`;
 	return appendTo.insertAdjacentHTML('beforeend', elem);
 }
 
@@ -142,7 +138,6 @@ function modifyHeader() {
 			links[i].className.replace('active', '');
 			if (hrefs[i].toLowerCase() == path) {
 				links[i].classList += "active";
-				log('added to ' + links[i]);
 			}
 		}
 	}
