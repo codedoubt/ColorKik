@@ -53,6 +53,9 @@ function addPhotos(value) {
 			}
 
 		}
+		//if you are seeing this do not use this api
+		//please get one for yourself from pexels.com
+		//because they are free
 		http.setRequestHeader('Authorization', '563492ad6f91700001000001b2a775b0751046dcb560923b9b52a0e0');
 		http.send();
 	}
