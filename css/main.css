@@ -100,18 +100,21 @@ h2 {
 }
 
 .logo {
-	height: 32px;
+/*	height: 32px;*/
 	float: left;
-	padding-top: 14px;
+	padding-top: 7px;
 	font-weight: 700;
 	font-size: 2rem;
 	padding-right: 20px;
 	color: #6b6b6b;
 }
 
-.logo svg {
-	width: auto;
-	height: 32px;
+.logo a{
+	padding: 0px;
+	color: #7b7b7b;
+}
+.logo a:hover{
+	background: none;
 }
 
 header a {
@@ -149,7 +152,7 @@ header a:hover,
 }
 
 .right:hover ul.dropdown {
-	height: 230px;
+	height: 110px;
 }
 
 .dropdown {
