@@ -64,7 +64,7 @@ function addPhotos(value) {
 
 function alerrt(clipboard, color) {
 	log(typeof clipboard);
-	clip = new ClipboardJS(color, {
+	var clip = new ClipboardJS(color, {
 		text: function (trigger) {
 			return trigger.getAttribute('data-c');
 		}
@@ -90,7 +90,6 @@ function closeTip(){
 //pURL = photographerURL
 function createElement(appendTo, img, p, pURL, c1, c2, c3, c4, c5) {
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	log(img);
 	const d = new Date();
 	let elem = `<div class="color_palette"><div class="palette">				<div class="img"><img src="${img}" alt="Tyler">
 					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'><p>${c1}</p></div><div class="color" style="background:${c2}" data-c='${c2}'><p>${c2}</p></div><div class="color" style="background:${c3}" data-c='${c3}'><p>${c3}</p></div><div class="color" style="background:${c4}" data-c='${c4}'><p>${c4}</p></div><div class="color" style="background:${c5}" data-c='${c5}'><p>${c5}</p></div></div></div><div class="cFoot">			<button data-id="" class="like"><svg class="btn-svg" viewBox="0 0 400 874" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421">			<path d="M267.614 383.395l132.304 81.708L147.94 873.117l-15.636-383.395L0 408.014 251.979 0l15.635 383.395z"/></svg>Like</button><div id="date">	${d.getDate()}${monthNames[d.getMonth()]},${d.getFullYear()}</div></div></div>`;
@@ -155,7 +154,7 @@ function modifyHeader() {
 
 //the code below is colorcube.min.js
 //you can find it at https://github.com/codedoubt/color-cube
-ImageCanvas=function(b){this.canvas=document.createElement("canvas"),this.ctx=this.canvas.getContext("2d"),this.w=this.canvas.width=b.width,this.h=this.canvas.height=b.height,this.ctx.drawImage(b,0,0,this.w,this.h),document.body.appendChild(this.canvas),this.clear=function(){this.ctx.clearRect(0,0,this.w,this.h)},this.getPixels=function(){return this.w*this.h},this.getImageData=function(){return this.ctx.getImageData(0,0,this.w,this.h)},this.remove=function(){this.canvas.parentNode.removeChild(this.canvas)}},ColorCube=function(){},ColorCube.prototype.getPalette=function(b,d,f){var j=f||function(){},q=[],v=[],w=new Image;w.src=b,w.crossOrigin="Anonymous",log(w),w.addEventListener("load",function(){for(var x=new ImageCanvas(w),y=x.getImageData().data,z=x.getPixels(),A=0,B=0,C=0,D=0,E=0;E<z;E+=5)B=y[(A=4*E)+0],C=y[A+1],D=y[A+2],y[A+3],v[v.length]=[B,C,D];x.clear(),x.remove();var F=MMCQ.quantize(v,d||10);q=F?F.palette():null,j(q)})};
+var ImageCanvas=function(t){this.canvas=document.createElement("canvas"),this.ctx=this.canvas.getContext("2d"),this.w=this.canvas.width=t.width,this.h=this.canvas.height=t.height,this.ctx.drawImage(t,0,0,this.w,this.h),document.body.appendChild(this.canvas),this.clear=function(){this.ctx.clearRect(0,0,this.w,this.h)},this.getPixels=function(){return this.w*this.h},this.getImageData=function(){return this.ctx.getImageData(0,0,this.w,this.h)},this.remove=function(){this.canvas.parentNode.removeChild(this.canvas)}},ColorCube=function(){};ColorCube.prototype.getPalette=function(t,e,a){var i=a||function(){},n=e||10,s=t,h=[],c=[],o=new Image;o.src=s,o.crossOrigin="Anonymous",log(o),o.addEventListener("load",function(){for(var t=new ImageCanvas(o),e=t.getImageData().data,a=t.getPixels(),s=0,r=0,g=0,u=0,v=0;v<a;v+=5)r=e[(s=4*v)+0],g=e[s+1],u=e[s+2],e[s+3],c[c.length]=[r,g,u];t.clear(),t.remove();var l=MMCQ.quantize(c,n);h=l?l.palette():null,i(h)})};
 
 /*
  * quantize.js Copyright 2008 Nick Rabinowitz
