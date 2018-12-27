@@ -1,3 +1,4 @@
+'use strict';
 var $ = function (e) {
 	if (e[0] == "#")
 		return document.getElementById(e.slice(1));
