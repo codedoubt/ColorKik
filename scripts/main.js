@@ -21,7 +21,7 @@ function addPhotos(value) {
 		const output = $('#output');
 		output.innerHTML = '';
 		const page = Math.floor(Math.random() * 10 + 1);
-		const URL = `https://api.pexels.com/v1/search?query=${newValue}&per_page=5&page=1&mode=nocors`;
+		const URL = `https://api.pexels.com/v1/search?query=${newValue}&per_page=40&page=${page}&mode=nocors`;
 		const http = new XMLHttpRequest();
 		http.open('GET', URL, true);
 		http.onload = function () {
