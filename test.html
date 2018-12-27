@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="css/main.css">
+	<title>Pexels test</title>
+
+</head>
+
+<body>
+	<h1> testing pexels </h1>
+	<input type="text" onkeyup="showImages(this.value)" id="search">
+	<div class="container">
+		<div id="output">
+
+		</div>
+	</div>
+	<script src="scripts/kik.min.js"></script>
+	<script>
+		function showImages(value) {
+			if (event.key == 'Enter' || event.keyCode == 13) {
+				const newValue = encodeURI(value);
+				const output = $('#output');
+				output.innerHTML = '';
+				const page = Math.floor(Math.random() * 50 + 1);
+				const URL = `https://api.pexels.com/v1/search?query=${newValue}&per_page=10&page=1&mode=nocors`;
+				const http = new XMLHttpRequest();
+				http.open('GET', URL, true);
+				http.onload = function() {
+					const data = JSON.parse(http.responseText);
+					log(data);
+					const array = data.photos;
+					output.innerHTML = "";
+					for (let i = 0; i < array.length; i++) {
+						const src = array[i].src.medium;
+						const ph = array[i].photographer;
+						const pURL = array[i].photographer_url;
+
+						const kik = new Kik();
+						const palette = kik.getPalette(src, 6, updateOutput);
+
+						function updateOutput(p) {
+							const c1 = rgbToHex(p[0]);
+							const c2 = rgbToHex(p[1]);
+							const c3 = rgbToHex(p[2]);
+							const c4 = rgbToHex(p[3]);
+							const c5 = rgbToHex(p[4]);
+							createElement(output, src, ph, pURL, c1, c2, c3, c4, c5);
+						}
+					}
+				}
+				http.setRequestHeader('Authorization', '563492ad6f91700001000001b2a775b0751046dcb560923b9b52a0e0');
+				http.send();
+			}
+
+		}
+		//p = photographer
+		//pURL = photographerURL
+		function createElement(appendTo, img, p, pURL, c1, c2, c3, c4, c5) {
+			const monthNames = ["Jan", "Feb", "March", "April", "May", "June","July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+			log(img);
+			const d = new Date();
+			let elem = `<div class="color_palette">
+			<div class="palette">
+				<div class="img">
+					<img src="${img}" alt="${p}">
+					<div class="imgFoot">
+						Photographer <a href="${pURL}">${p}</a>
+					</div>
+				</div>
+				<div class="colors">
+					<div class="color" style="background:${c1}"></div>
+					<div class="color" style="background:${c2}"></div>
+					<div class="color" style="background:${c3}"></div>
+					<div class="color" style="background:${c4}"></div>
+					<div class="color" style="background:${c5}"></div>
+				</div>
+			</div>
+			<div class="cFoot">
+				<button data-id="" class="like">
+					<svg class="btn-svg" viewBox="0 0 400 874" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421">
+						<path d="M267.614 383.395l132.304 81.708L147.94 873.117l-15.636-383.395L0 408.014 251.979 0l15.635 383.395z"/>
+					</svg>
+					Like
+				</button>
+				<div id="date">
+					${d.getDate()} ${monthNames[d.getMonth()]},${d.getFullYear()}
+				</div>
+			</div>
+		</div>`;
+			return appendTo.insertAdjacentHTML('beforeend', elem);
+		}
+
+		function rgbToHex([r, g, b]) {
+			return '#' + [r, g, b].map(function(x) {
+				var hex = x.toString(16)
+				return hex.length === 1 ? '0' + hex : hex
+			}).join('');
+		}
+
+	</script>
+</body>
+
+</html>
