@@ -62,7 +62,6 @@ function addPhotos(value) {
 }
 
 function alerrt(clipboard, color) {
-	log(typeof clipboard);
 	var clip = new ClipboardJS(color, {
 		text: function (trigger) {
 			return trigger.getAttribute('data-c');
