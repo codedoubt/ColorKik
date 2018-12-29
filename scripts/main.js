@@ -76,7 +76,7 @@ function saveColor() {
 		this.classList += ' btnLiked';
 		this.childNodes[0].classList += ' svgLiked';
 		this.childNodes[1].nodeValue = 'Liked';
-		const html = this.parentNode.parentNode.innerHTML;
+		const html = this.parentNode.parentNode.outerHTML;
 		localStorage.setItem(id, html);
 	}
 }
