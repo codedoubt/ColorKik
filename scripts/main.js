@@ -1,7 +1,7 @@
 var $ = function (e) {
-	if (e[0] == "#")
+	if (e[0] === "#")
 		return document.getElementById(e.slice(1));
-	else if (e[0] == '.')
+	else if (e[0] === '.')
 		return document.getElementsByClassName(e.slice(1));
 	else
 		return document.getElementsByTagName(e);
@@ -77,8 +77,10 @@ function saveColor() {
 		this.childNodes[0].classList += ' svgLiked';
 		this.childNodes[1].nodeValue = 'Liked';
 		var item = this.parentNode.parentNode.innerHTML;
+		
+		
 		log(item);
-		localStorage.setItem(this.getAttribute('data-id'),item);
+		localStorage.setItem('colors',JSON.stringify(colorsArray));
 	}
 }
 
