@@ -43,7 +43,7 @@ function addPhotos(value) {
 					const c3 = rgbToHex(p[2]);
 					const c4 = rgbToHex(p[3]);
 					const c5 = rgbToHex(p[4]);
-					createElement(output,id, src, ph, pURL, c1, c2, c3, c4, c5);
+					createElement(output, id, src, ph, pURL, c1, c2, c3, c4, c5);
 
 					const color = $('.color');
 					const clipboard = new ClipboardJS(color);
@@ -65,24 +65,25 @@ function addPhotos(value) {
 	}
 }
 
-const likedPalette = [];
 function saveColor() {
+	const id = this.getAttribute('data-id');
 	if (this.classList.contains('btnLiked')) {
 		this.classList.remove('btnLiked');
 		this.childNodes[0].classList.remove('svgLiked');
 		this.childNodes[1].nodeValue = 'Like';
-		log(localStorage.getItem('colors').indexOf(this.getAttribute('data-id')));
-		localStorage.removeItem();
+		localStorage.removeItem(id);
 	} else {
 		this.classList += ' btnLiked';
 		this.childNodes[0].classList += ' svgLiked';
 		this.childNodes[1].nodeValue = 'Liked';
-		var id = this.getAttribute('data-id');
-		var html = this.parentNode.parentNode.innerHTML;
-		//adding elements to LikedPalette
-		likedPalette.push({id,html});
-		localStorage.setItem('colors',JSON.stringify(likedPalette));
+		const html = this.parentNode.parentNode.innerHTML;
+		localStorage.setItem(id, html);
 	}
+}
+
+function getAllColors() {
+    const keys = (Object.keys(localStorage));
+    return keys;
 }
 
 function alerrt(clipboard, color) {
@@ -110,7 +111,7 @@ function closeTip() {
 }
 //p = photographer
 //pURL = photographerURL
-function createElement(appendTo,id, img, p, pURL, c1, c2, c3, c4, c5) {
+function createElement(appendTo, id, img, p, pURL, c1, c2, c3, c4, c5) {
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	const d = new Date();
 	let elem = `<div class="color_palette"><div class="palette">				<div class="img"><img src="${img}" alt="Tyler">
