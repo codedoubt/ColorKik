@@ -90,12 +90,14 @@ h1{
 	font-weight: 700;
 	color: #2b2b2b;
 }
-.head{
-	font-size: 6vw;
-	color: #007fff;
-}
+
 h2 {
 	font-size: 3rem;
+}
+p{
+	line-height: 1.6rem;
+	color: #4b4b4b;
+	padding: 10px 0px;
 }
 .dummy {
 	width: 100%;
@@ -214,9 +216,16 @@ header a:hover,
 
 /******* header ends ****/
 .about {
-	width: 90%;
+	max-width:700px;
 	height: auto;
-	
+	padding: 40px 30px;
+	box-sizing: border-box;
+	margin: 0px auto;
+}.head{
+	font-size: 6rem;
+	text-align: center;
+}.wrap{
+	padding-top: 50px;
 }
 .container{
 	width: 90%;
