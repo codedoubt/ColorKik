@@ -33,7 +33,7 @@ function addPhotos(value) {
 				const src = array[i].src.medium;
 				const ph = array[i].photographer;
 				const pURL = array[i].photographer_url;
-
+				const id = array[i].id;
 				const cc = new ColorCube();
 				const palette = cc.getPalette(src, 6, updateOutput);
 
@@ -43,7 +43,7 @@ function addPhotos(value) {
 					const c3 = rgbToHex(p[2]);
 					const c4 = rgbToHex(p[3]);
 					const c5 = rgbToHex(p[4]);
-					createElement(output, src, ph, pURL, c1, c2, c3, c4, c5);
+					createElement(output,id, src, ph, pURL, c1, c2, c3, c4, c5);
 
 					const color = $('.color');
 					const clipboard = new ClipboardJS(color);
@@ -66,9 +66,20 @@ function addPhotos(value) {
 }
 
 function saveColor() {
-	this.classList += ' btnLiked';
-	this.childNodes[0].classList += ' svgLiked';
-
+	if (this.classList.contains('btnLiked')) {
+		this.classList.remove('btnLiked');
+		this.childNodes[0].classList.remove('svgLiked');
+		this.childNodes[1].nodeValue = 'Like';
+		localStorage.removeItem(this.getAttribute('data-id'));
+		
+	} else {
+		this.classList += ' btnLiked';
+		this.childNodes[0].classList += ' svgLiked';
+		this.childNodes[1].nodeValue = 'Liked';
+		var item = this.parentNode.parentNode.innerHTML;
+		log(item);
+		localStorage.setItem(this.getAttribute('data-id'),item);
+	}
 }
 
 function alerrt(clipboard, color) {
@@ -96,11 +107,11 @@ function closeTip() {
 }
 //p = photographer
 //pURL = photographerURL
-function createElement(appendTo, img, p, pURL, c1, c2, c3, c4, c5) {
+function createElement(appendTo,id, img, p, pURL, c1, c2, c3, c4, c5) {
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	const d = new Date();
 	let elem = `<div class="color_palette"><div class="palette">				<div class="img"><img src="${img}" alt="Tyler">
-					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'></div><div class="color" style="background:${c2}" data-c='${c2}'></div><div class="color" style="background:${c3}" data-c='${c3}'></div><div class="color" style="background:${c4}" data-c='${c4}'></div><div class="color" style="background:${c5}" data-c='${c5}'></div></div></div><div class="cFoot"><button data-id="" class="like"><svg class="btn-svg" viewBox="0 0 400 874" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421">			<path d="M267.614 383.395l132.304 81.708L147.94 873.117l-15.636-383.395L0 408.014 251.979 0l15.635 383.395z"/></svg>Like</button><div id="date">	${d.getDate()} ${monthNames[d.getMonth()]},${d.getFullYear()}</div></div></div>`;
+					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'></div><div class="color" style="background:${c2}" data-c='${c2}'></div><div class="color" style="background:${c3}" data-c='${c3}'></div><div class="color" style="background:${c4}" data-c='${c4}'></div><div class="color" style="background:${c5}" data-c='${c5}'></div></div></div><div class="cFoot"><button data-id="${id}" class="like"><svg class="btn-svg" viewBox="0 0 400 874" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421">			<path d="M267.614 383.395l132.304 81.708L147.94 873.117l-15.636-383.395L0 408.014 251.979 0l15.635 383.395z"/></svg>Like</button><div id="date">	${d.getDate()} ${monthNames[d.getMonth()]},${d.getFullYear()}</div></div></div>`;
 	return appendTo.insertAdjacentHTML('beforeend', elem);
 }
 
