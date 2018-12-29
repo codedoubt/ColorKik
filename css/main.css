@@ -92,6 +92,7 @@ h1{
 }
 .head{
 	font-size: 6vw;
+	color: #007fff;
 }
 h2 {
 	font-size: 3rem;
@@ -212,7 +213,12 @@ header a:hover,
 }
 
 /******* header ends ****/
-.container {
+.about {
+	width: 90%;
+	height: auto;
+	
+}
+.container{
 	width: 90%;
 	height: auto;
 	box-sizing: border-box;
