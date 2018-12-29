@@ -45,17 +45,21 @@
 		</div>
 	</header>
 	<div class="dummy"></div>
-	<div id="output">
-		
+	<div class="container">
+		<div id="output">
+
+		</div>
 	</div>
 	<script src="https://unpkg.com/clipboard@2.0.0/dist/clipboard.min.js"></script>
 	<script src="../scripts/main.js"></script>
 	<script>
 		var output = $('#output');
 		var likedPalette = getAllColors();
-		for(let i = 0; i < likedPalette.length ; i++){
-			output.insertAdjacentHTML('beforeend',localStorage.getItem(likedPalette[i]));
+		for (let i = 0; i < likedPalette.length; i++) {
+			output.insertAdjacentHTML('beforeend', localStorage.getItem(likedPalette[i]));
 		}
+
 	</script>
 </body>
+
 </html>
