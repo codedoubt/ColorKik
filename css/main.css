@@ -471,7 +471,7 @@ canvas {
 		width: 70%;
 	}
 
-	#output {
+	#output,#liked {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
