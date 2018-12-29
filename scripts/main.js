@@ -65,22 +65,23 @@ function addPhotos(value) {
 	}
 }
 
+const likedPalette = [];
 function saveColor() {
 	if (this.classList.contains('btnLiked')) {
 		this.classList.remove('btnLiked');
 		this.childNodes[0].classList.remove('svgLiked');
 		this.childNodes[1].nodeValue = 'Like';
-		localStorage.removeItem(this.getAttribute('data-id'));
-		
+		log(localStorage.getItem('colors').indexOf(this.getAttribute('data-id')));
+		localStorage.removeItem();
 	} else {
 		this.classList += ' btnLiked';
 		this.childNodes[0].classList += ' svgLiked';
 		this.childNodes[1].nodeValue = 'Liked';
-		var item = this.parentNode.parentNode.innerHTML;
-		
-		
-		log(item);
-		localStorage.setItem('colors',JSON.stringify(colorsArray));
+		var id = this.getAttribute('data-id');
+		var html = this.parentNode.parentNode.innerHTML;
+		//adding elements to LikedPalette
+		likedPalette.push({id,html});
+		localStorage.setItem('colors',JSON.stringify(likedPalette));
 	}
 }
 
