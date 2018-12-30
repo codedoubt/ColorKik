@@ -18,6 +18,7 @@ addPhotos('blossom');
 
 function addPhotos(value) {
 	if (/\S+/.test(value)) {
+		try{
 		const newValue = encodeURI(value);
 		const output = $('#output');
 		output.innerHTML = '';
@@ -62,6 +63,10 @@ function addPhotos(value) {
 		//because they are free
 		http.setRequestHeader('Authorization', '563492ad6f91700001000001b2a775b0751046dcb560923b9b52a0e0');
 		http.send();
+	}
+		catch(e){
+			log(e);
+		}
 	}
 }
 
