@@ -103,7 +103,12 @@ p{
 	line-height: 1.6rem;
 	color: #4b4b4b;
 	padding: 10px 0px;
+	font-size: 1.2rem;
 }
+a{
+	color: #9e51d5;
+}
+
 .dummy {
 	width: 100%;
 	height: 60px;
