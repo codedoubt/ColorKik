@@ -1,5 +1,5 @@
 # Color Kik
-This is an open source site to generate color palettes from images. A color palette generating site using images <a href="https://colorkik.com">ColorKik</a>.
+This is an open source site to generate color palettes from images. Check the site at <a href="https://colorkik.com">ColorKik</a>.
 
 # samples
 
