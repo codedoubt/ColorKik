@@ -22,7 +22,7 @@ function addPhotos(value) {
 		const newValue = encodeURI(value);
 		const output = $('#output');
 		
-		const loader = `<div class="loader">...</div>`;
+		const loader = `<div class="loader"></div>`;
 		output.innerHTML = loader;
 		const page = Math.floor(Math.random() * 10 + 1);
 		const URL = `https://api.pexels.com/v1/search?query=${newValue}&per_page=40&page=${page}&mode=nocors`;
