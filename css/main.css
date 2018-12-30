@@ -85,7 +85,7 @@ header {
 	z-index: 10000;
 }
 
-h1{
+h1 {
 	font-size: 4rem;
 	font-weight: 700;
 	color: #2b2b2b;
@@ -94,18 +94,21 @@ h1{
 h2 {
 	font-size: 3rem;
 }
-h3{
+
+h3 {
 	font-size: 2rem;
 	color: #2b2b2b;
 	padding-top: 50px;
 }
-p{
+
+p {
 	line-height: 1.6rem;
 	color: #4b4b4b;
 	padding: 10px 0px;
 	font-size: 1.2rem;
 }
-a{
+
+a {
 	color: #9e51d5;
 }
 
@@ -123,12 +126,13 @@ a{
 	color: #6b6b6b;
 }
 
-.logo a{
+.logo a {
 	padding: 0px;
 	color: #7b7b7b;
 	background: none;
 }
-.logo a:hover{
+
+.logo a:hover {
 	background: none;
 }
 
@@ -224,20 +228,66 @@ header a:hover,
 	color: white;
 }
 
+/* loading css*/
+.loader {
+	width: 100px;
+	height: 100px;
+	border-top: 2px solid transparent;
+	border-left: 5px solid #000;
+	border-bottom: 2px solid #000;
+	border-right: 5px solid #000;
+	background: transparent;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	animation: load 400ms linear infinite;
+}
+
+@-webkit-keyframes load {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+@-o-keyframes load {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+@-moz-keyframes load {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+@keyframes load {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
 /******* header ends ****/
 .about {
-	max-width:700px;
+	max-width: 700px;
 	height: auto;
 	padding: 40px 30px;
 	box-sizing: border-box;
 	margin: 0px auto;
-}.head{
+}
+
+.head {
 	font-size: 6rem;
 	text-align: center;
-}.wrap{
+}
+
+.wrap {
 	padding-top: 50px;
 }
-.container{
+
+.container {
 	width: 90%;
 	height: auto;
 	box-sizing: border-box;
@@ -317,22 +367,8 @@ img {
 	background: red;
 	cursor: pointer;
 	box-sizing: border-box;
-/*	position: relative;*/
 }
-/*
-.color p{
-	position: absolute;
-	bottom: 0px;
-	border-bottom: 1px solid white;
-	width: 100%;
-	left: 0px;
-	background: #2b2b2b;
-	text-align: center;
-	color: #7b7b7b;
-	padding: 2px 0px;
-	
-}
-*/
+
 .cFoot {
 	width: 100%;
 	background: #2b2b2b;
@@ -384,7 +420,8 @@ button:hover {
 button:hover .btn-svg {
 	fill: #2b2b2b;
 }
-.showColor{
+
+.showColor {
 	transition: .5s;
 	position: fixed;
 	top: 0;
@@ -392,10 +429,11 @@ button:hover .btn-svg {
 	z-index: 100000;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(100,100,100,.9);
+	background: rgba(100, 100, 100, .9);
 	box-sizing: border-box;
 }
-.tip_group{
+
+.tip_group {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -406,9 +444,10 @@ button:hover .btn-svg {
 	padding: 5px;
 	border-radius: 5px;
 	background: white;
-	transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
 }
-.showText{
+
+.showText {
 	width: 100%;
 	height: 150px;
 	position: relative;
@@ -416,7 +455,8 @@ button:hover .btn-svg {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
-.showText .close{
+
+.showText .close {
 	background: #2b2b2b;
 	color: white;
 	border-radius: 15px;
@@ -428,7 +468,8 @@ button:hover .btn-svg {
 	text-align: center;
 	cursor: pointer;
 }
-.tool{
+
+.tool {
 	text-align: center;
 	box-sizing: border-box;
 	width: 100%;
@@ -438,6 +479,7 @@ button:hover .btn-svg {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+
 canvas {
 	display: none;
 }
@@ -448,39 +490,6 @@ canvas {
 		padding: 0px 30px;
 	}
 
-	.color_palette {
-		width: 100%;
-		height: 100%;
-		margin-top: 30px;
-	}
-
-	.palette {
-		width: 100%;
-		height: 80%;
-		display: flex;
-	}
-
-	.img {
-		width: 80%;
-		height: 100%;
-	}
-
-	img {
-		border-top-right-radius: 0px;
-	}
-
-	.colors {
-		width: 20%;
-		height: 100%;
-		flex-direction: column;
-		border-top: 0px;
-		border-left: 5px solid #f3f3f3;
-		background: blue;
-	}
-	.color {
-		width: 100%;
-		height: 20%;
-	}
 }
 
 @media screen and (min-width: 860px) {
@@ -498,7 +507,8 @@ canvas {
 		width: 70%;
 	}
 
-	#output,#liked {
+	#output,
+	#liked {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
@@ -507,8 +517,6 @@ canvas {
 	.color_palette {
 		width: 48%;
 	}
-
-
 }
 
 @media screen and (min-width: 1024px) {
