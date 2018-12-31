@@ -6,15 +6,17 @@ var $ = function (e) {
 	else
 		return document.getElementsByTagName(e);
 }
-var log = console.log;
 
+var log = console.log;
 function showImages(value) {
 	if ((event.key == 'Enter' || event.keyCode == 13) && /\S+/ig.test(value)) {
 		addPhotos(value);
 	}
 }
+
 //https://api.pexels.com/v1/curated?per_page=15&page=1
 //addPhotos('blossom');
+
 function addPhotos(value) {
 	if (/\S+/.test(value)) {
 		try {
@@ -38,10 +40,7 @@ function addPhotos(value) {
 					const ph = array[i].user;
 					const pURL = array[i].userImageURL;
 					const id = array[i].id;
-					//				const src = array[i].src.medium;
-					//				const ph = array[i].photographer;
-					//				const pURL = array[i].photographer_url;
-					//				const id = array[i].id;
+
 					const cc = new ColorCube();
 					const palette = cc.getPalette(src, 6, updateOutput);
 
@@ -65,19 +64,14 @@ function addPhotos(value) {
 				}
 
 			}
-			//if you are seeing this do not use this api
-			//please get one for yourself from pexels.com
-			//because they are free
-			//		http.setRequestHeader('Authorization', '563492ad6f91700001000001b2a775b0751046dcb560923b9b52a0e0');
+			
 			http.send();
 		} catch (e) {
 			log(e);
 		}
 	}
 }
-//pixabay
-////6154095-ca7730abb494e0d43f1665a91
-//https://pixabay.com/api/?key=6154095-ca7730abb494e0d43f1665a91&q=${newValue}&image_type=photo&editors_choice=true
+
 function saveColor() {
 	const id = this.getAttribute('data-id');
 	if (this.classList.contains('btnLiked')) {
@@ -122,6 +116,7 @@ function alertColor(color) {
 function closeTip() {
 	$('.showColor')[0].style.display = "none";
 }
+
 //p = photographer
 //pURL = photographerURL
 function createElement(appendTo, id, img, p, pURL, c1, c2, c3, c4, c5) {
