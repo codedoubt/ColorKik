@@ -15,8 +15,7 @@ function showImages(value) {
 }
 
 //https://api.pexels.com/v1/curated?per_page=15&page=1
-//addPhotos('blossom');
-
+addPhotos('blossom');
 function addPhotos(value) {
 	if (/\S+/.test(value)) {
 		try {
