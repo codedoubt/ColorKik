@@ -145,8 +145,9 @@ header a {
 	border-radius: 20px;
 }
 
-header a:hover,
+header a:hover,header a:visited,
 .active {
+	text-decoration: none;
 	background: #4b4b4b;
 }
 
