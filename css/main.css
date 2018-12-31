@@ -147,6 +147,7 @@ header a {
 
 header a:hover,header a:visited,
 .active {
+	color: #ddd;
 	text-decoration: none;
 	background: #4b4b4b;
 }
