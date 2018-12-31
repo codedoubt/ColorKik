@@ -17,60 +17,67 @@ function showImages(value) {
 //addPhotos('blossom');
 function addPhotos(value) {
 	if (/\S+/.test(value)) {
-		try{
-		const newValue = encodeURI(value);
-		const output = $('#output');
-		
-		const loader = `<div class="loader"></div>`;
-		output.innerHTML = loader;
-		const page = Math.floor(Math.random() * 10 + 1);
-		const URL = `https://api.pexels.com/v1/search?query=${newValue}&per_page=40&page=${page}&mode=nocors`;
-		const http = new XMLHttpRequest();
-		http.open('GET', URL, true);
-		http.onload = function () {
-			const data = JSON.parse(http.responseText);
-			const array = data.photos;
-			output.innerHTML = "";
-			for (let i = 0; i < array.length; i++) {
-				const src = array[i].src.medium;
-				const ph = array[i].photographer;
-				const pURL = array[i].photographer_url;
-				const id = array[i].id;
-				const cc = new ColorCube();
-				const palette = cc.getPalette(src, 6, updateOutput);
+		try {
+			const newValue = encodeURI(value);
+			const output = $('#output');
 
-				function updateOutput(p) {
-					const c1 = rgbToHex(p[0]);
-					const c2 = rgbToHex(p[1]);
-					const c3 = rgbToHex(p[2]);
-					const c4 = rgbToHex(p[3]);
-					const c5 = rgbToHex(p[4]);
-					createElement(output, id, src, ph, pURL, c1, c2, c3, c4, c5);
+			const loader = `<div class="loader"></div>`;
+			output.innerHTML = loader;
+			const page = Math.floor(Math.random() * 10 + 1);
+			const URL = `https://pixabay.com/api/?key=6154095-ca7730abb494e0d43f1665a91&q=${newValue}&per_page=200&image_type=photo&editors_choice=true`;
+			//		const URL = `https://api.pexels.com/v1/search?query=${newValue}&per_page=40&page=${page}&mode=nocors`;
+			const http = new XMLHttpRequest();
+			http.open('GET', URL, true);
+			http.onload = function () {
+				const data = JSON.parse(http.responseText);
+				log(data);
+				const array = data.hits;
+				output.innerHTML = "";
+				for (let i = 0; i < array.length; i++) {
+					const src = array[i].webformatURL;
+					const ph = array[i].user;
+					const pURL = array[i].userImageURL;
+					const id = array[i].id;
+					//				const src = array[i].src.medium;
+					//				const ph = array[i].photographer;
+					//				const pURL = array[i].photographer_url;
+					//				const id = array[i].id;
+					const cc = new ColorCube();
+					const palette = cc.getPalette(src, 6, updateOutput);
 
-					const color = $('.color');
-					const clipboard = new ClipboardJS(color);
-					alerrt(clipboard, color);
+					function updateOutput(p) {
+						const c1 = rgbToHex(p[0]);
+						const c2 = rgbToHex(p[1]);
+						const c3 = rgbToHex(p[2]);
+						const c4 = rgbToHex(p[3]);
+						const c5 = rgbToHex(p[4]);
+						createElement(output, id, src, ph, pURL, c1, c2, c3, c4, c5);
 
-					const like = $('button');
-					for (var i = 0; i < like.length; i++) {
-						like[i].addEventListener('click', saveColor);
+						const color = $('.color');
+						const clipboard = new ClipboardJS(color);
+						alerrt(clipboard, color);
+
+						const like = $('button');
+						for (var i = 0; i < like.length; i++) {
+							like[i].addEventListener('click', saveColor);
+						}
 					}
 				}
-			}
 
-		}
-		//if you are seeing this do not use this api
-		//please get one for yourself from pexels.com
-		//because they are free
-		http.setRequestHeader('Authorization', '563492ad6f91700001000001b2a775b0751046dcb560923b9b52a0e0');
-		http.send();
-	}
-		catch(e){
+			}
+			//if you are seeing this do not use this api
+			//please get one for yourself from pexels.com
+			//because they are free
+			//		http.setRequestHeader('Authorization', '563492ad6f91700001000001b2a775b0751046dcb560923b9b52a0e0');
+			http.send();
+		} catch (e) {
 			log(e);
 		}
 	}
 }
-
+//pixabay
+////6154095-ca7730abb494e0d43f1665a91
+//https://pixabay.com/api/?key=6154095-ca7730abb494e0d43f1665a91&q=${newValue}&image_type=photo&editors_choice=true
 function saveColor() {
 	const id = this.getAttribute('data-id');
 	if (this.classList.contains('btnLiked')) {
@@ -88,8 +95,8 @@ function saveColor() {
 }
 
 function getAllColors() {
-    const keys = (Object.keys(localStorage));
-    return keys;
+	const keys = (Object.keys(localStorage));
+	return keys;
 }
 
 function alerrt(clipboard, color) {
@@ -193,6 +200,7 @@ var ImageCanvas = function (t) {
 			this.canvas.parentNode.removeChild(this.canvas)
 		}
 	},
+
 	ColorCube = function () {};
 ColorCube.prototype.getPalette = function (t, e, a) {
 	var i = a || function () {},
