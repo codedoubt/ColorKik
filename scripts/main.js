@@ -21,12 +21,12 @@ function addPhotos(value) {
 		try {
 			const newValue = encodeURI(value);
 			const output = $('#output');
-
+			
 			const loader = `<div class="loader"></div>`;
 			output.innerHTML = loader;
+			
 			const page = Math.floor(Math.random() * 10 + 1);
 			const URL = `https://pixabay.com/api/?key=6154095-ca7730abb494e0d43f1665a91&q=${newValue}&per_page=200&image_type=photo&editors_choice=true`;
-			//		const URL = `https://api.pexels.com/v1/search?query=${newValue}&per_page=40&page=${page}&mode=nocors`;
 			const http = new XMLHttpRequest();
 			http.open('GET', URL, true);
 			http.onload = function () {
