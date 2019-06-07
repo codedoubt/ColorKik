@@ -75,8 +75,6 @@ function alertClipBoard(color) {
 }
 
 function alertColor(color) {
-//	if ($('.showColor')[0].style.display != 'none')
-//		$('.showColor')[0].style.display = 'none';
 	$('.showColor')[0].style.display = "";
 	$('.showText')[0].style.background = color;
 	$('.tip')[0].innerHTML = "";
@@ -94,7 +92,7 @@ function createElement(appendTo, id, img, p, pURL, c1, c2, c3, c4, c5) {
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	const d = new Date();
 	let elem = `<div class="color_palette"><div class="palette">				<div class="img"><img src="${img}" alt="${p}">
-					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'  onclick="alertClipBoard(this)"></div><div class="color" style="background:${c2}" data-c='${c2}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c3}" data-c='${c3}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c4}" data-c='${c4}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c5}" data-c='${c5}' onclick="alertClipBoard(this)"></div></div></div><div class="cFoot">Shot by <a href="${pURL}">${p}</a></div>`;
+					</div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'  onclick="alertClipBoard(this)"></div><div class="color" style="background:${c2}" data-c='${c2}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c3}" data-c='${c3}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c4}" data-c='${c4}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c5}" data-c='${c5}' onclick="alertClipBoard(this)"></div></div></div><div class="cFoot">Shot by <a href="${pURL}">${p}</a></div>`;
 	return appendTo.insertAdjacentHTML('beforeend', elem);
 }
 
@@ -128,7 +126,8 @@ ColorCube.prototype.getPalette = function (t, e, a) {
 		h = [],
 		c = [],
 		o = new Image;
-	o.src = s, o.crossOrigin = "Anonymous", log(o), o.addEventListener("load", function () {
+	o.src = s, o.crossOrigin = "Anonymous"
+	/*, log(o)*/, o.addEventListener("load", function () {
 		for (var t = new ImageCanvas(o), e = t.getImageData().data, a = t.getPixels(), s = 0, r = 0, g = 0, u = 0, v = 0; v < a; v += 5) r = e[(s = 4 * v) + 0], g = e[s + 1], u = e[s + 2], e[s + 3], c[c.length] = [r, g, u];
 		t.clear(), t.remove();
 		var l = MMCQ.quantize(c, n);
