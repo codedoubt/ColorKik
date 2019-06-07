@@ -31,7 +31,7 @@ function addPhotos(value) {
 			http.open('GET', URL, true);
 			http.onload = function () {
 				const data = JSON.parse(http.responseText);
-				log(data);
+//				log(data);
 				const array = data.hits;
 				output.innerHTML = "";
 				for (let i = 0; i < array.length; i++) {
@@ -50,15 +50,6 @@ function addPhotos(value) {
 						const c4 = rgbToHex(p[3]);
 						const c5 = rgbToHex(p[4]);
 						createElement(output, id, src, ph, pURL, c1, c2, c3, c4, c5);
-
-						const color = $('.color');
-						const clipboard = new ClipboardJS(color);
-						alerrt(clipboard, color);
-
-						const like = $('button');
-						for (var i = 0; i < like.length; i++) {
-							like[i].addEventListener('click', saveColor);
-						}
 					}
 				}
 
@@ -71,28 +62,8 @@ function addPhotos(value) {
 	}
 }
 
-function saveColor() {
-	const id = this.getAttribute('data-id');
-	if (this.classList.contains('btnLiked')) {
-		this.classList.remove('btnLiked');
-		this.childNodes[0].classList.remove('svgLiked');
-		this.childNodes[1].nodeValue = 'Like';
-		localStorage.removeItem(id);
-	} else {
-		this.classList += ' btnLiked';
-		this.childNodes[0].classList += ' svgLiked';
-		this.childNodes[1].nodeValue = 'Liked';
-		const html = this.parentNode.parentNode.outerHTML;
-		localStorage.setItem(id, html);
-	}
-}
 
-function getAllColors() {
-	const keys = (Object.keys(localStorage));
-	return keys;
-}
-
-function alerrt(clipboard, color) {
+function alertClipBoard(color) {
 	var clip = new ClipboardJS(color, {
 		text: function (trigger) {
 			return trigger.getAttribute('data-c');
@@ -104,8 +75,8 @@ function alerrt(clipboard, color) {
 }
 
 function alertColor(color) {
-	if ($('.showColor')[0].style.display != 'none')
-		$('.showColor')[0].style.display = 'none';
+//	if ($('.showColor')[0].style.display != 'none')
+//		$('.showColor')[0].style.display = 'none';
 	$('.showColor')[0].style.display = "";
 	$('.showText')[0].style.background = color;
 	$('.tip')[0].innerHTML = "";
@@ -116,13 +87,14 @@ function closeTip() {
 	$('.showColor')[0].style.display = "none";
 }
 
+
 //p = photographer
 //pURL = photographerURL
 function createElement(appendTo, id, img, p, pURL, c1, c2, c3, c4, c5) {
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	const d = new Date();
-	let elem = `<div class="color_palette"><div class="palette">				<div class="img"><img src="${img}" alt="Tyler">
-					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'></div><div class="color" style="background:${c2}" data-c='${c2}'></div><div class="color" style="background:${c3}" data-c='${c3}'></div><div class="color" style="background:${c4}" data-c='${c4}'></div><div class="color" style="background:${c5}" data-c='${c5}'></div></div></div><div class="cFoot"><button data-id="${id}" class="like"><svg class="btn-svg" viewBox="0 0 400 874" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421">			<path d="M267.614 383.395l132.304 81.708L147.94 873.117l-15.636-383.395L0 408.014 251.979 0l15.635 383.395z"/></svg>Like</button><div id="date">	${d.getDate()} ${monthNames[d.getMonth()]},${d.getFullYear()}</div></div></div>`;
+	let elem = `<div class="color_palette"><div class="palette">				<div class="img"><img src="${img}" alt="${p}">
+					<div class="imgFoot">Shot by <a href="${pURL}">${p}</a></div></div><div class="colors"><div class="color" style="background:${c1}" data-c='${c1}'  onclick="alertClipBoard(this)"></div><div class="color" style="background:${c2}" data-c='${c2}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c3}" data-c='${c3}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c4}" data-c='${c4}' onclick="alertClipBoard(this)"></div><div class="color" style="background:${c5}" data-c='${c5}' onclick="alertClipBoard(this)"></div></div></div><div class="cFoot">Shot by <a href="${pURL}">${p}</a></div>`;
 	return appendTo.insertAdjacentHTML('beforeend', elem);
 }
 
@@ -132,53 +104,6 @@ function rgbToHex([r, g, b]) {
 		return hex.length === 1 ? '0' + hex : hex
 	}).join('');
 }
-
-
-
-
-window.addEventListener('resize', modifyHeader);
-modifyHeader();
-
-function modifyHeader() {
-	var w = window,
-		d = document,
-		e = d.documentElement,
-		g = d.getElementsByTagName('body')[0],
-		x = w.innerWidth || e.clientWidth || g.clientWidth,
-		y = w.innerHeight || e.clientHeight || g.clientHeight;
-	var left = `<li><a href="/">Images</a></li>`;
-	var right = `<li><a href="/likes/">Your Likes</a></li>
-				<li><a href="/about/">About</a></li>`;
-	if (x > 860) {
-		$('.left')[0].innerHTML = '';
-		$('.left')[0].insertAdjacentHTML('beforeend', left);
-		$('.dropdown')[0].innerHTML = '';
-		$('.dropdown')[0].insertAdjacentHTML('beforeend', right);
-
-	} else {
-		$('.left')[0].innerHTML = '';
-		$('.dropdown')[0].innerHTML = '';
-		$('.dropdown')[0].insertAdjacentHTML('afterbegin', left + right);
-	}
-
-	activateLink();
-
-	function activateLink() {
-		var links = $('header')[0].querySelectorAll('a');
-		var hrefs = [];
-		for (var a = 0; a < links.length; a++) {
-			hrefs[hrefs.length] = links[a].href;
-		}
-		var path = window.location;
-		for (var i = 0; i < links.length; i++) {
-			links[i].className.replace('active', '');
-			if (hrefs[i].toLowerCase() == path) {
-				links[i].classList += "active";
-			}
-		}
-	}
-}
-
 
 
 //the code below is colorcube.min.js
